@@ -1,0 +1,4 @@
+ExpiresActive On
+ExpiresDefault A63072000
+FileETag None
+Header unset P3P

@@ -1,0 +1,126 @@
+.aboutText{
+
+}
+
+.Today-Birthday{
+    color: black;
+    -webkit-text-fill-color: blue; /* Will override color (regardless of order) */
+    -webkit-text-stroke-width: 0.5px;
+    -webkit-text-stroke-color: black;
+    text-align: center;
+}
+
+.date{
+    text-align:right;
+    font-family: Copperplate / Copperplate Gothic Light, sans-serif;
+    font-size:23px;
+    font-weight:bold;
+    color:cornflowerblue;
+}
+
+.ui-icon-balloon {
+    background-image: url('balloon.png') !important;/*I added the !important, I found that this rule was being overwritten*/
+    /*text-align: center;*/
+    background-position:50% 50%;
+}
+
+body{
+    margin:0%;
+}
+
+#pageTitle{
+    position:relative;
+    padding-top: 6px;
+}
+
+#updatesTitle{
+    text-align:center;
+    font-family: Arial,sans-serif;
+    font-size:23px;
+    font-weight:bold;
+    color:white;
+
+    padding-top: 0px;
+    position:fixed;
+    height:40px;
+    width:100%;
+    background-color: #0ca3d2;
+}
+
+#updatesContent{
+    height:auto;
+    overflow: auto;
+    height:93.5%;
+    position:fixed;
+    top:40px;
+    font-family: Arial,sans-serif;
+}
+
+.updateRow{
+    position:relative;
+    float:left;
+    width: 99%;
+    border-top: 1px solid rgba(222, 217, 216, 0.37);
+    padding-top:5px;
+    padding-bottom:7px;
+    padding-right:3px;
+    padding-left:3px;
+}
+
+
+
+.header{
+    position:relative;
+    width:100%;
+}
+
+
+.pic{
+    position:relative;
+    width: 52px;
+    height: 52px;
+    float: left;
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius:8px;
+    overflow: hidden;
+    /*transition:-webkit-transform 1s;*/
+}
+
+
+
+.name{
+    padding-right:3px;
+    padding-left:5px;
+    position:relative;
+    font-size: 14px;
+    float: left;
+}
+
+.username{
+    padding-top: 2px;
+    padding-right:3px;
+    padding-left:3px;
+    position:relative;
+    font-size: 12px;
+    color: #999;
+    float: left;
+}
+.msg{
+    /*direction:rtl;*/
+    color: #333;
+    font-size: 14px;
+    position:relative;
+    float:right;
+
+}
+.timestamp{
+    color: #999;
+    position:relative;
+    float:right;
+    font-size: 11px;
+    padding-top: 3px;
+}
+
+
+

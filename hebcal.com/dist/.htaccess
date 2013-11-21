@@ -1,0 +1,26 @@
+IndexOptions +SuppressHTMLPreamble +IconWidth=20 +IconHeight=22 \
+	+NameWidth=* +DescriptionWidth=*
+HeaderName HEADER.html
+ReadmeName README.html
+IndexIgnore RCS
+
+AddDescription "Aliyah-by-aliyah breakdown of parshiyot" aliyah.xml
+AddDescription "Torah readings for festivals" festival.xml
+AddDescription "WordPress Shabbat Times widget" hebcal-shabbat-widget.zip
+
+Redirect /dist/fullkriyah.csv http://www.hebcal.com/sedrot/fullkriyah-5774.csv
+Redirect /dist/triennial.csv http://www.hebcal.com/sedrot/triennial-5774-5777.csv
+
+Redirect gone /dist/zips99.dbdump.txt
+Redirect gone /dist/gen_holidays.pl
+Redirect gone /dist/shabbat.pl
+Redirect gone /dist/calc_triennial.pl
+Redirect gone /dist/yahrzeit.pl
+Redirect gone /dist/hebcal.pl
+Redirect gone /dist/zips2db.pl
+Redirect gone /dist/del_cookie.pl
+Redirect gone /dist/hebcal-dot-com.tar.gz
+Redirect gone /dist/Palm-DBA.pm
+Redirect gone /dist/HebcalGPL.pm
+Redirect gone /dist/ChangeLog.txt
+Redirect gone /dist/zips99.sqldump.gz

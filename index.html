@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+
+    <link rel='stylesheet' type='text/css' href='css/tweeter.css'>
+    <link rel="stylesheet" type='text/css' href="css/jquery.mobile-1.1.1.min.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="js/jquery-1.7.1.min.js"></script>
+    <script src="js/jquery.mobile-1.1.1.min.js"></script>
+
+</head>
+<body>
+
+<div data-role="page" id="about">
+
+    <div data-role="header">
+        <h1>Jewish Birthday</h1>
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#facebookFriends" onclick="me()" data-transition="flip"  data-icon="search">Get All Friends Jewish Birthday</a></li>
+            </ul>
+        </div><!-- /navbar -->
+    </div><!-- /header -->
+
+
+
+    <div data-role="content">
+
+        <fb:login-button show-faces="true" width="200" max-rows="1"></fb:login-button>
+
+        <div class="aboutText">
+            <img src="logo.jpg">
+            <br><br><br>
+            Coming Soon!!!   <br>
+
+            Jewish Birthday - (Android App ver 1.0): <br> <br>
+
+            Display today friends Jewish Birthday<br>
+            All your friends Jewish Birthday.<br> <br>
+
+            For each friend on the list you can:
+            <br>
+            1. Share MAZAL-TOV Post on his/her facebook wall.
+            <br>
+            2. Save reminder in your phone calendar for your friend birthday.
+            <br><br><br><br>
+            thanks! :)<br>
+            Ariel Schreiber.   <br>
+            Email: arielsch@gmail.com   <br>
+            Facebook: Ariel Schreiber   <br>
+        </div>
+
+        <!--<button onclick="facebookWallPost()">wall post</button>-->
+    </div><!-- /content -->
+
+
+    <div data-role="footer" data-position="fixed">
+
+        <div data-role="navbar">
+            <ul>
+
+                <li><a href="#about" data-icon="info" data-transition="flip">About</a> </li>
+
+            </ul>
+        </div>
+
+    </div><!-- /footer -->
+
+</div><!-- /page -->
+
+
+<div data-role="page" id="facebookFriends">
+
+    <div data-role="header">
+        <h1>Jewish Birthday</h1>
+        <div data-role="navbar">
+            <ul>
+                <!--<li><a href="#convertDate" data-transition="flip" data-icon="forward">Convert Date</a></li>-->
+                <li><a href="#facebookFriends"  data-transition="flip" data-icon="search">Get All Friends Jewish Birthday</a></li>
+            </ul>
+        </div><!-- /navbar -->
+    </div><!-- /header -->
+
+
+
+    <div data-role="content">
+        <div class="Today-Birthday">Today Hebrew Birthday:</div>
+        <ul data-role="listview" data-inset="true" id="todayFriendListTest" data-split-icon="gear" data-split-theme="d" class="ui-listview">
+        </ul>
+
+
+        <div class="Today-Birthday">All Friends Birthday:</div>
+        loading...<br><br>
+        <ul data-role="listview" data-inset="true" data-filter="true" id="friendList" data-split-icon="gear" data-split-theme="d" class="ui-listview">
+
+        </ul>
+    </div><!-- /content -->
+    <div data-role="footer" data-position="fixed">
+
+        <div data-role="navbar">
+            <ul>
+
+                <li><a href="#about" data-icon="info" data-transition="flip">About</a> </li>
+
+            </ul>
+        </div>
+    </div><!-- /footer -->
+</div><!-- /page -->
+
+
+
+
+
+
+
+
+
+<script src="//connect.facebook.net/en_US/all.js"></script>
+<script>
+
+
+// Here we run a very simple test of the Graph API after login is successful.-->
+// This testAPI() function is only called in those cases.-->
+function testAPI() {
+    console.log('Welcome!  Fetching your information.... ');
+    FB.api('/me', function(response) {
+        console.log('Good to see you, ' + response.name + '.');
+    });
+}
+
+
+window.onload = function() {
+    FB.init({
+    appId      : '598855086803188', // App ID-->
+    channelUrl : 'http://localhost:8080', // Channel File-->
+    status     : true, // check login status-->
+    cookie     : true, // enable cookies to allow the server to access the session-->
+    xfbml      : true  // parse XFBML-->
+});
+
+// Here we subscribe to the auth.authResponseChange JavaScript event. This event is fired-->
+// for any authentication related change, such as login, logout or session refresh. This means that-->
+// whenever someone who was previously logged out tries to log in again, the correct case below-->
+// will be handled.-->
+FB.Event.subscribe('auth.authResponseChange', function(response) {
+// Here we specify what we do with the response anytime this event occurs.-->
+if (response.status === 'connected') {
+// The response object is returned with a status field that lets the app know the current-->
+// login status of the person. In this case, we're handling the situation where they-->
+// have logged in to the app.-->
+testAPI();
+} else if (response.status === 'not_authorized') {
+// In this case, the person is logged into Facebook, but not into the app, so we call-->
+// FB.login() to prompt them to do so.-->
+// In real-life usage, you wouldn't want to immediately prompt someone to login-->
+// like this, for two reasons:-->
+// (1) JavaScript created popup windows are blocked by most browsers unless they-->
+// result from direct interaction from people using the app (such as a mouse click)-->
+// (2) it is a bad experience to be continually prompted to login upon page load.-->
+FB.login();
+} else {
+// In this case, the person is not logged into Facebook, so we call the login()-->
+// function to prompt them to do so. Note that at this stage there is no indication-->
+// of whether they are logged into the app. If they aren't then they'll see the Login-->
+// dialog right after they log in to Facebook.-->
+// The same caveats as above apply to the FB.login() call here.-->
+FB.login();
+    }
+});
+    // Load the SDK asynchronously
+    (function(d){
+        var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement('script'); js.id = id; js.async = true;
+        js.src = "//connect.facebook.net/en_US/all.js";
+        ref.parentNode.insertBefore(js, ref);
+    }(document));
+
+    // Here we run a very simple test of the Graph API after login is successful.
+    // This testAPI() function is only called in those cases.
+    function testAPI() {
+        console.log('Welcome!  Fetching your information.... ');
+        FB.api('/me', function(response) {
+            console.log('Good to see you, ' + response.name + '.');
+        });
+    }
+};
+
+
+
+var fdata,tHd,tHm,tHy;
+var finalGy,finalGm,finalGd;
+
+function clearDate(){
+    document.getElementById("date").value="";
+}
+function convertDate(){
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1;
+    var yyyy = today.getFullYear();
+    console.log("hebcal.com/converter/?cfg=json&gy="+yyyy+"&gm="+mm+"&gd="+dd+"&g2h=1");
+    $.ajax({
+        url: "hebcal.com/converter/?cfg=json&gy="+yyyy+"&gm="+mm+"&gd="+dd+"&g2h=1",
+        type: "Get",
+        dataType:"json",
+        success: function (dataHeb) {
+            tHd=dataHeb.hd;
+            tHm= dataHeb.hm;
+            tHy=dataHeb.hy;
+
+        },
+        error: function (err) {
+
+             alert(err);
+        }
+    });
+
+    var date=document.getElementById("date").value;
+    var arr=date.split('-');
+    var gy=arr[0];
+    var gm=arr[1];
+    var gd=arr[2];
+    var hm,hd;
+    $.ajax({
+        url: "hebcal.com/converter/?cfg=json&gy="+gy+"&gm="+gm+"&gd="+gd+"&g2h=1",
+        type: "Get",
+        dataType:"json",
+        success: function (dataHeb) {
+//                alert(dataHeb.hebrew);
+            document.getElementById("hebrew").innerHTML="<p style='float:right'>"+ dataHeb.hebrew+"</p><br>";
+            //need to add logic to find the closet hebrew year
+            $.ajax({
+                url: "hebcal.com/converter/?cfg=json&hy="+tHy+"&hm="+dataHeb.hm+"&hd="+dataHeb.hd+"&h2g=1",
+                type: "Get",
+                dataType:"json",
+                success: function (date) {
+                    finalGy=date.gy;
+                    finalGm=date.gm;
+                    finalGd=date.gd;
+                    document.getElementById("georgian").innerHTML="<br><p style='float:left'>This year "+
+                            dataHeb.hd+"/"+dataHeb.hm+" is on: <br>"+finalGd+"/"+finalGm+"/"+finalGy+"</p><br>";
+
+                },
+                error: function (err) {
+                    debugger;
+                    alert(err);
+                }
+            });
+
+        },
+        error: function (err) {
+            debugger;
+            alert(err);
+        }
+    });
+
+
+}
+
+
+function getLoginStatus() {
+    FB.getLoginStatus(function(response) {
+        if (response.status == 'connected') {
+            alert('logged in');
+        } else {
+            alert('not logged in');
+        }
+    });
+}
+var friendIDs = [];
+
+function me() {
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1;
+    var yyyy = today.getFullYear();
+    var data = document.getElementById('friendList');
+    var todayBirthdayData =  document.getElementById('todayFriendListTest');
+    data.innerHTML="";
+    todayBirthdayData.innerHTML="";
+    $.ajax({
+        url: "hebcal.com/converter/?cfg=json&gy="+yyyy+"&gm="+mm+"&gd="+dd+"&g2h=1",
+        type: "Get",
+        dataType:"json",
+        success: function (dataHeb) {
+            tHd=dataHeb.hd;
+            tHm= dataHeb.hm;
+            tHy=dataHeb.hm;
+        },
+        error: function (err) {
+            debugger;
+            alert(err);
+        }
+    });
+
+
+    FB.api('/me/friends', { fields: 'name, picture, birthday' },  function(response) {
+        if (response.error) {
+            alert(JSON.stringify(response.error));
+        } else {
+
+            fdata=response.data;
+
+            var newFriendsList = [];
+            response.data.forEach(function(item) {
+                if (item.birthday=== undefined || item.birthday.length<=6){
+
+
+                }
+                else
+                {
+                    arr=item.birthday.split('/');
+                    day=arr[1];
+                    month=arr[0];
+                    year=arr[2];
+                    $.ajax({
+                        url: "hebcal.com/converter/?cfg=json&gy="+year+"&gm="+month+"&gd="+day+"&g2h=1",
+                        type: "Get",
+                        dataType:"json",
+                        success: function (dataHeb) {
+                           var d = document.createElement('div');
+                           d.innerHTML="<li data-corners='false' data-shadow='false' data-iconshadow='true' data-wrapperels='div' data-icon='false' data-iconpos='right' data-theme='c' class='ui-btn ui-btn-icon-right ui-li ui-li-has-alt ui-li-has-thumb ui-btn-up-c'><div class='ui-btn-inner ui-li ui-li-has-alt'><div class='ui-btn-text'><a href='index.html' class='ui-link-inherit'><img src="+item.picture.data.url+" class='ui-li-thumb' style='width:80px;height:80px;'><h3 class='ui-li-heading'>" +item.name+"</h3><p class='ui-li-desc'>"+  item.birthday +"</p><p class='ui-li-desc' style='float:right'>"+dataHeb["hebrew"]+"</p></a></div></div><a href='#popupBasic' data-rel='popup' data-position-to='window' data-transition='pop' title='Purchase album' class='ui-li-link-alt ui-btn ui-btn-icon-notext ui-btn-up-c' data-corners='false' data-shadow='false' data-iconshadow='true' data-wrapperels='span' data-icon='false' data-iconpos='notext' data-theme='c' aria-haspopup='true' aria-owns='#purchase'><span class='ui-btn-inner'><span class='ui-btn-text'></span><span data-corners='true' data-shadow='true' data-iconshadow='true' data-wrapperels='span' data-icon='gear' data-iconpos='notext' data-theme='d' title='' class='ui-btn ui-btn-up-d ui-shadow ui-btn-corner-all ui-btn-icon-notext'><span class='ui-btn-inner ui-btn-corner-all'><span class='ui-btn-text'></span><span class='ui-icon ui-icon-gear ui-icon-shadow'>&nbsp;</span></span></span></span></a></li>";
+                            if ((tHd===dataHeb.hd)&&(tHm===dataHeb.hm)){
+                                todayBirthdayData.appendChild(d);
+                            }
+                            else{
+                                data.appendChild(d)};
+                        },
+                        error: function (err) {
+                            debugger;
+                            alert(err);
+                        }
+                    });
+                    newFriendsList.push(item);
+                }
+             });
+        }
+        var friends = response.data;
+
+        for (var k = 0; k < friends.length && k < 200; k++) {
+            var friend = friends[k];
+            var index = 1;
+
+            friendIDs[k] = friend.id;
+            //friendsInfo[k] = friend;
+        }
+
+    });
+}
+
+</script>
+
+</body>
+</html>
